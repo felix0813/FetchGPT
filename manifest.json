@@ -1,0 +1,33 @@
+{
+  "manifest_version": 3,
+  "name": "ChatGPT Reply Markdown Exporter",
+  "description": "Export assistant replies from the current ChatGPT page into separate Markdown files.",
+  "version": "1.0.0",
+  "permissions": [
+    "activeTab",
+    "downloads"
+  ],
+  "host_permissions": [
+    "https://chatgpt.com/*",
+    "https://chat.openai.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Export ChatGPT Replies"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://chatgpt.com/*",
+        "https://chat.openai.com/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ]
+}
