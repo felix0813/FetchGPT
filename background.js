@@ -5,9 +5,12 @@ chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
 
   const files = Array.isArray(message.files) ? message.files : [];
   if (files.length === 0) {
+    console.error("[FetchGPT] 后台下载失败：没有收到可下载的文件。")
     sendResponse({ ok: false, error: "没有收到可下载的文件。" });
     return;
   }
+
+  console.info(`[FetchGPT] 后台开始下载 ${files.length} 个文件。`);
 
   files.forEach((file, index) => {
     const safeName = file.name || `chatgpt-reply-${index + 1}.md`;
